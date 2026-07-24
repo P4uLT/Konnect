@@ -186,11 +186,10 @@ impl Symbol {
         reference: &str,
         unit: u32,
     ) {
-        if self
+        if !self
             .raw_sub_nodes
             .iter()
-            .position(|n| n.tag() == Some("instances"))
-            .is_none()
+            .any(|n| n.tag() == Some("instances"))
         {
             self.raw_sub_nodes
                 .push(SexpNode::List(vec![atom("instances")]));
